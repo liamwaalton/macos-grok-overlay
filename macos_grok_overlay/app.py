@@ -67,10 +67,12 @@ class AppDelegate(NSObject):
         # Create a borderless, floating, resizable window
         self.window = AppWindow.alloc().initWithContentRect_styleMask_backing_defer_(
             NSMakeRect(500, 200, 550, 580),
-            NSClosableWindowMask | NSMiniaturizableWindowMask | NSResizableWindowMask | NSFullSizeContentViewWindowMask,
+            NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask | NSResizableWindowMask | NSFullSizeContentViewWindowMask,
             NSBackingStoreBuffered,
             False
         )
+        self.window.setTitlebarAppearsTransparent_(True)
+        self.window.setTitleVisibility_(NSWindowTitleHidden)
         self.window.setLevel_(NSFloatingWindowLevel)
         self.window.setCollectionBehavior_(
             NSWindowCollectionBehaviorCanJoinAllSpaces
