@@ -67,7 +67,7 @@ class AppDelegate(NSObject):
         # Create a borderless, floating, resizable window
         self.window = AppWindow.alloc().initWithContentRect_styleMask_backing_defer_(
             NSMakeRect(500, 200, 550, 580),
-            NSBorderlessWindowMask | NSResizableWindowMask,
+            NSClosableWindowMask | NSMiniaturizableWindowMask | NSResizableWindowMask | NSFullSizeContentViewWindowMask,
             NSBackingStoreBuffered,
             False
         )
@@ -105,13 +105,6 @@ class AppDelegate(NSObject):
             NSMakeRect(0, content_bounds.size.height - DRAG_AREA_HEIGHT, content_bounds.size.width, DRAG_AREA_HEIGHT)
         )
         content_view.addSubview_(self.drag_area)
-        # Add close button to the drag area
-        close_button = NSButton.alloc().initWithFrame_(NSMakeRect(5, 5, 20, 20))
-        close_button.setBordered_(False)
-        close_button.setImage_(NSImage.imageWithSystemSymbolName_accessibilityDescription_("xmark.circle.fill", None))
-        close_button.setTarget_(self)
-        close_button.setAction_("hideWindow:")
-        self.drag_area.addSubview_(close_button)
         # Update the webview sizinug and insert it below drag area.
         content_view.addSubview_(self.webview)
         self.webview.setFrame_(NSMakeRect(0, 0, content_bounds.size.width, content_bounds.size.height - DRAG_AREA_HEIGHT))
